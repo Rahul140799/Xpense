@@ -1,4 +1,4 @@
-# personalexpenses
+# Xpense
 
 A Flutter App to track your daily expenses
 
