@@ -12,7 +12,24 @@ class TransactionList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 300,
-      child: ListView.builder(
+      child: transactions.isEmpty ? Column(
+        children: <Widget>[
+          Text(
+            'No Transactions added yet',
+            style: Theme.of(context).textTheme.title,
+            ),
+          SizedBox(
+           height: 20, 
+          ),
+          Container(
+           height: 200,
+           child: Image.asset(
+             'assets/images/waiting.png',
+             fit: BoxFit.cover,
+             ), 
+          )
+        ],
+      ) : ListView.builder(
         itemBuilder: (ctx, index) {
           return Card(
             child: Row(
@@ -24,16 +41,17 @@ class TransactionList extends StatelessWidget {
                   ),
                   decoration: BoxDecoration(
                       border: Border.all(
-                    color: Colors.purple,
+                    color: Theme.of(context).primaryColor,
                     width: 2,
                   )),
                   padding: EdgeInsets.all(10),
                   child: Text(
-                    '₹ ' + transactions[index].amount.toString() + '.00',
+                    '₹ ' + transactions[index].amount.toStringAsFixed(2),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.purple),
+                        color: Theme.of(context).primaryColor,
+                      ),
                   ),
                 ),
                 Column(
@@ -41,10 +59,7 @@ class TransactionList extends StatelessWidget {
                   children: <Widget>[
                     Text(
                       transactions[index].title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
+                      style: Theme.of(context).textTheme.title,
                     ),
                     Text(
                       DateFormat.yMMMd().format(transactions[index].date),
